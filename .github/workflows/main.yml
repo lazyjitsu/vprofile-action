@@ -60,14 +60,14 @@ jobs:
         uses: appleboy/docker-ecr-action@master
         with:
           - name: upload image to ECR
-  uses: appleboy/docker-ecr-action@master
-  with:
-    access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    registry: ${{ secrets.REGISTRY }}
-    repo: ${{ env.ECR_REPOSITORY }}
-    region: ${{ env.AWS_REGION }}
-    tag: latest,${{ github.run_number }}
-    daemon_off: false
-    dockerfile: ./Dockerfile
-    context: ./
+         uses: appleboy/docker-ecr-action@master
+        with:
+          access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          registry: ${{ secrets.REGISTRY }}
+          repo: ${{ env.ECR_REPOSITORY }}
+          region: ${{ env.AWS_REGION }}
+          tag: latest,${{ github.run_number }}
+          daemon_off: false
+          dockerfile: ./Dockerfile
+          context: ./
