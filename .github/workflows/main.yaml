@@ -4,7 +4,7 @@ env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: vprofileapp
   EKS_CLUSTER: vprofile-eks
-
+  AWS_ACCOUNT: 882376726113
 jobs:
   Testing:
     runs-on: ubuntu-latest
@@ -93,7 +93,12 @@ jobs:
         run: cat ~/.kube/config
 
       - name: Login to ECR
-        run: kubectl create secret docker-registry regcred --docker-server=${{ secrets.REGISTRY }} --docker-username=AWS --docker-password=$(aws ecr get-login-password)
+        # run: kubectl create secret docker-registry regcred --docker-server=${{ secrets.REGISTRY }} --docker-username=AWS --docker-password=$(aws ecr get-login-password)
+        run: kubectl create secret docker-registry regcred \
+          --docker-server=${env.AWS_ACCOUNT}.dkr.ecr.${env.AWS_REGION}.amazonaws.com \
+          --docker-username=AWS \
+          --docker-password=$(aws ecr get-login-password) \
+          --namespace=default
 
       - name: Deploy Helm
         uses: bitovi/github-actions-deploy-eks-helm@v1.2.8
