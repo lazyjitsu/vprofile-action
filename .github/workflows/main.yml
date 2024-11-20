@@ -3,7 +3,7 @@ name: vprofile actions
 on: workflow_dispatch
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: vprofile-sem
+  ECR_REPOSITORY: vprofileapp
   ECS_CLUSTER: vprofile-eks
 jobs:
   Testing:
